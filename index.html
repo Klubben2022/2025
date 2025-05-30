@@ -296,6 +296,7 @@
             border-radius: 8px;
             margin-bottom: 16px;
             font-weight: 500;
+            display: none;
         }
         
         .alert-success {
@@ -420,6 +421,14 @@
             display: block;
         }
         
+        .content-view {
+            display: none;
+        }
+        
+        .content-view.active {
+            display: block;
+        }
+        
         .wins {
             color: #28a745;
             font-weight: 600;
@@ -438,6 +447,13 @@
             margin-bottom: 12px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             border-left: 4px solid #4caf50;
+        }
+        
+        /* Separator between divisions */
+        .division-separator {
+            border-top: 3px solid #4caf50;
+            margin: 30px 0;
+            padding-top: 20px;
         }
         
         .schedule-week {
@@ -491,6 +507,14 @@
         }
         
         .mobile-schedule {
+            display: block;
+        }
+        
+        .schedule-division {
+            display: none;
+        }
+        
+        .schedule-division.active {
             display: block;
         }
         
@@ -686,7 +710,7 @@
     </div>
 
     <div class="container">
-        <h1 class="page-title" id="page-title">Poängtabell</h1>
+        <h1 class="page-title" id="page-title">Rapportera Match</h1>
         
         <div class="tournament-header">
             <div class="tournament-title">
@@ -712,1136 +736,1484 @@
             </div>
         </div>
 
-        <div class="division-tabs" id="division-tabs">
-            <button class="division-tab active clickable" onclick="showDivision('herr1')">Herrar</button>
-            <button class="division-tab clickable" onclick="showDivision('dam1')">Damer</button>
-        </div>
-
         <!-- Schedule View -->
-        <div id="schedule-view" class="content-view" style="display: none;">
-            <div class="content-section">
-                <h2 class="section-title">🏆 Herrturnering 2025</h2>
-                
+        <div id="schedule-view" class="content-view">
+            <div class="division-tabs">
+                <button class="division-tab active clickable" onclick="showScheduleDivision('herr')">Herrar</button>
+                <button class="division-tab clickable" onclick="showScheduleDivision('dam')">Damer</button>
+            </div>
+
+            <!-- Herr Schedule -->
+            <div id="schedule-herr" class="schedule-division active">
                 <div class="content-section">
-                    <h3 class="section-title">Division 1 - 5 spelare</h3>
-                    <p style="margin-bottom: 16px;"><strong>Startar:</strong> 19 maj 2025 (måndag) | <strong>Slutar:</strong> 23 juni 2025</p>
+                    <h2 class="section-title">🏆 Herrturnering 2025</h2>
                     
-                    <!-- Mobile Schedule -->
-                    <div class="mobile-schedule">
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 1 - 19 maj 18:00 (GLS)</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div>Kristoffer Arvidsson & Dennis Fränberg</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Ahmedin Murtezic & Christer Sjölander</div>
-                                </div>
-                            </div>
-                            <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Jonas Lidén</div>
+                    <div class="content-section">
+                        <h3 class="section-title">Division 1 - 5 spelare</h3>
+                        <p style="margin-bottom: 16px;"><strong>Startar:</strong> 19 maj 2025 (måndag) | <strong>Slutar:</strong> 23 juni 2025</p>
+                        
+                        <!-- Mobile Schedule -->
+                        <div class="mobile-schedule">
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 1 - 19 maj 18:00 (GLS)</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Kristoffer Arvidsson & Dennis Fränberg</strong></div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div><strong>Ahmedin Murtezic & Christer Sjölander</strong></div>
+                                    </div>
+                        
+                        <!-- Desktop Table för Dam Division 2 -->
+                        <div class="table-container desktop-table">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vecka</th>
+                                        <th>Match</th>
+                                        <th>Datum</th>
+                                        <th>Tid</th>
+                                        <th>Lag 1</th>
+                                        <th>Lag 2</th>
+                                        <th>Bana</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="3">1</td>
+                                        <td>1</td>
+                                        <td>20 maj</td>
+                                        <td>18:00</td>
+                                        <td>Ajsa Elezovic & Mai Khan Vo</td>
+                                        <td>Anna P & Maria Petersson</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>20 maj</td>
+                                        <td>18:00</td>
+                                        <td>Harisa Santic & Emilia Andersson</td>
+                                        <td>Erika Falk & Ina Rudleuskaya</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>20 maj</td>
+                                        <td>18:00</td>
+                                        <td>Valeska Blomberg & Amanda Johansson</td>
+                                        <td>Gunilla Ljungkvist & Madeleine Remnehöjd</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">2</td>
+                                        <td>1</td>
+                                        <td>27 maj</td>
+                                        <td>16:30</td>
+                                        <td>Madeleine Remnehöjd & Amanda Johansson</td>
+                                        <td>Ajsa Elezovic & Anna P</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>27 maj</td>
+                                        <td>16:30</td>
+                                        <td>Valeska Blomberg & Gunilla Ljungkvist</td>
+                                        <td>Ina Rudleuskaya & Emilia Andersson</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>27 maj</td>
+                                        <td>16:30</td>
+                                        <td>Erika Falk & Mai Khan Vo</td>
+                                        <td>Harisa Santic & Maria Petersson</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">3</td>
+                                        <td>1</td>
+                                        <td>3 juni</td>
+                                        <td>18:00</td>
+                                        <td>Emilia Andersson & Erika Falk</td>
+                                        <td>Ajsa Elezovic & Ina Rudleuskaya</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>3 juni</td>
+                                        <td>18:00</td>
+                                        <td>Gunilla Ljungkvist & Amanda Johansson</td>
+                                        <td>Maria Petersson & Mai Khan Vo</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>3 juni</td>
+                                        <td>18:00</td>
+                                        <td>Harisa Santic & Anna P</td>
+                                        <td>Madeleine Remnehöjd & Valeska Blomberg</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">4</td>
+                                        <td>1</td>
+                                        <td>10 juni</td>
+                                        <td>16:30</td>
+                                        <td>Ina Rudleuskaya & Anna P</td>
+                                        <td>Emilia Andersson & Gunilla Ljungkvist</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>10 juni</td>
+                                        <td>16:30</td>
+                                        <td>Harisa Santic & Valeska Blomberg</td>
+                                        <td>Maria Petersson & Madeleine Remnehöjd</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>10 juni</td>
+                                        <td>16:30</td>
+                                        <td>Erika Falk & Ajsa Elezovic</td>
+                                        <td>Mai Khan Vo & Amanda Johansson</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">5</td>
+                                        <td>1</td>
+                                        <td>17 juni</td>
+                                        <td>18:00</td>
+                                        <td>Emilia Andersson & Madeleine Remnehöjd</td>
+                                        <td>Amanda Johansson & Erika Falk</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>17 juni</td>
+                                        <td>18:00</td>
+                                        <td>Valeska Blomberg & Maria Petersson</td>
+                                        <td>Gunilla Ljungkvist & Ajsa Elezovic</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>17 juni</td>
+                                        <td>18:00</td>
+                                        <td>Anna P & Mai Khan Vo</td>
+                                        <td>Ina Rudleuskaya & Harisa Santic</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 2 - 26 maj 18:00 (GLS)</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div>Christer Sjölander & Jonas Lidén</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Ahmedin Murtezic & Dennis Fränberg</div>
-                                </div>
-                            </div>
-                            <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Kristoffer Arvidsson</div>
+                        <!-- Desktop Table -->
+                        <div class="table-container desktop-table">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vecka</th>
+                                        <th>Match</th>
+                                        <th>Datum</th>
+                                        <th>Tid</th>
+                                        <th>Lag 1</th>
+                                        <th>Lag 2</th>
+                                        <th>Bana</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="3">1</td>
+                                        <td>1</td>
+                                        <td>20 maj</td>
+                                        <td>18:00</td>
+                                        <td>Ajsa Elezovic & Mai Khan Vo</td>
+                                        <td>Anna P & Maria Petersson</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>20 maj</td>
+                                        <td>18:00</td>
+                                        <td>Harisa Santic & Emilia Andersson</td>
+                                        <td>Erika Falk & Ina Rudleuskaya</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>20 maj</td>
+                                        <td>18:00</td>
+                                        <td>Valeska Blomberg & Amanda Johansson</td>
+                                        <td>Gunilla Ljungkvist & Madeleine Remnehöjd</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">2</td>
+                                        <td>1</td>
+                                        <td>27 maj</td>
+                                        <td>16:30</td>
+                                        <td>Madeleine Remnehöjd & Amanda Johansson</td>
+                                        <td>Ajsa Elezovic & Anna P</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>27 maj</td>
+                                        <td>16:30</td>
+                                        <td>Valeska Blomberg & Gunilla Ljungkvist</td>
+                                        <td>Ina Rudleuskaya & Emilia Andersson</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>27 maj</td>
+                                        <td>16:30</td>
+                                        <td>Erika Falk & Mai Khan Vo</td>
+                                        <td>Harisa Santic & Maria Petersson</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">3</td>
+                                        <td>1</td>
+                                        <td>3 juni</td>
+                                        <td>18:00</td>
+                                        <td>Emilia Andersson & Erika Falk</td>
+                                        <td>Ajsa Elezovic & Ina Rudleuskaya</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>3 juni</td>
+                                        <td>18:00</td>
+                                        <td>Gunilla Ljungkvist & Amanda Johansson</td>
+                                        <td>Maria Petersson & Mai Khan Vo</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>3 juni</td>
+                                        <td>18:00</td>
+                                        <td>Harisa Santic & Anna P</td>
+                                        <td>Madeleine Remnehöjd & Valeska Blomberg</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">4</td>
+                                        <td>1</td>
+                                        <td>10 juni</td>
+                                        <td>16:30</td>
+                                        <td>Ina Rudleuskaya & Anna P</td>
+                                        <td>Emilia Andersson & Gunilla Ljungkvist</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>10 juni</td>
+                                        <td>16:30</td>
+                                        <td>Harisa Santic & Valeska Blomberg</td>
+                                        <td>Maria Petersson & Madeleine Remnehöjd</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>10 juni</td>
+                                        <td>16:30</td>
+                                        <td>Erika Falk & Ajsa Elezovic</td>
+                                        <td>Mai Khan Vo & Amanda Johansson</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">5</td>
+                                        <td>1</td>
+                                        <td>17 juni</td>
+                                        <td>18:00</td>
+                                        <td>Emilia Andersson & Madeleine Remnehöjd</td>
+                                        <td>Amanda Johansson & Erika Falk</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>17 juni</td>
+                                        <td>18:00</td>
+                                        <td>Valeska Blomberg & Maria Petersson</td>
+                                        <td>Gunilla Ljungkvist & Ajsa Elezovic</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>17 juni</td>
+                                        <td>18:00</td>
+                                        <td>Anna P & Mai Khan Vo</td>
+                                        <td>Ina Rudleuskaya & Harisa Santic</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 3 - 2 juni 18:00 (GLS)</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div>Dennis Fränberg & Jonas Lidén</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Kristoffer Arvidsson & Ahmedin Murtezic</div>
+                        <!-- Desktop Table -->
+                        <div class="table-container desktop-table">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vecka</th>
+                                        <th>Match</th>
+                                        <th>Datum</th>
+                                        <th>Tid</th>
+                                        <th>Lag 1</th>
+                                        <th>Lag 2</th>
+                                        <th>Bana</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="3">1</td>
+                                        <td>1</td>
+                                        <td>20 maj</td>
+                                        <td>16:30</td>
+                                        <td>Linnéa Leandersson & Magdalena Nilsson</td>
+                                        <td>Catharina Park & Cindy Goldschmidt</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>20 maj</td>
+                                        <td>16:30</td>
+                                        <td>Ulrika Johansson & Mia Burghardt</td>
+                                        <td>Karin Nyberg & Linda FalkBoman</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>2 juni</td>
+                                        <td>18:00</td>
+                                        <td>Anna Andersson & Malin Bräddhult</td>
+                                        <td>Sofia Svensson & Eva Månsson</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">2</td>
+                                        <td>1</td>
+                                        <td>27 maj</td>
+                                        <td>18:00</td>
+                                        <td>Linda FalkBoman & Magdalena Nilsson</td>
+                                        <td>Karin Nyberg & Mia Burghardt</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>27 maj</td>
+                                        <td>18:00</td>
+                                        <td>Anna Andersson & Linnéa Leandersson</td>
+                                        <td>Sofia Svensson & Ulrika Johansson</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>27 maj</td>
+                                        <td>18:00</td>
+                                        <td>Catharina Park & Malin Bräddhult</td>
+                                        <td>Cindy Goldschmidt & Eva Månsson</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">3</td>
+                                        <td>1</td>
+                                        <td>3 juni</td>
+                                        <td>16:30</td>
+                                        <td>Karin Nyberg & Sofia Svensson</td>
+                                        <td>Catharina Park & Magdalena Nilsson</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>3 juni</td>
+                                        <td>16:30</td>
+                                        <td>Malin Bräddhult & Ulrika Johansson</td>
+                                        <td>Anna Andersson & Eva Månsson</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>3 juni</td>
+                                        <td>16:30</td>
+                                        <td>Cindy Goldschmidt & Mia Burghardt</td>
+                                        <td>Linda FalkBoman & Linnéa Leandersson</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">4</td>
+                                        <td>1</td>
+                                        <td>10 juni</td>
+                                        <td>18:00</td>
+                                        <td>Linnéa Leandersson & Ulrika Johansson</td>
+                                        <td>Linda FalkBoman & Sofia Svensson</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>10 juni</td>
+                                        <td>18:00</td>
+                                        <td>Catharina Park & Eva Månsson</td>
+                                        <td>Anna Andersson & Cindy Goldschmidt</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>9 juni</td>
+                                        <td>18:00</td>
+                                        <td>Karin Nyberg & Magdalena Nilsson</td>
+                                        <td>Malin Bräddhult & Mia Burghardt</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">5</td>
+                                        <td>1</td>
+                                        <td>17 juni</td>
+                                        <td>16:30</td>
+                                        <td>Catharina Park & Linnéa Leandersson</td>
+                                        <td>Anna Andersson & Sofia Svensson</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>17 juni</td>
+                                        <td>16:30</td>
+                                        <td>Magdalena Nilsson & Malin Bräddhult</td>
+                                        <td>Eva Månsson & Karin Nyberg</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>17 juni</td>
+                                        <td>16:30</td>
+                                        <td>Linda FalkBoman & Mia Burghardt</td>
+                                        <td>Cindy Goldschmidt & Ulrika Johansson</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                                 </div>
+                                <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Jonas Lidén</div>
                             </div>
-                            <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Christer Sjölander</div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 2 - 26 maj 18:00 (GLS)</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Christer Sjölander & Jonas Lidén</strong></div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div><strong>Ahmedin Murtezic & Dennis Fränberg</strong></div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Kristoffer Arvidsson</div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 3 - 2 juni 18:00 (GLS)</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Dennis Fränberg & Jonas Lidén</strong></div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div><strong>Kristoffer Arvidsson & Ahmedin Murtezic</strong></div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Christer Sjölander</div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 4 - 9 juni 18:00 (GLS)</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Ahmedin Murtezic & Jonas Lidén</strong></div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div><strong>Christer Sjölander & Kristoffer Arvidsson</strong></div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Dennis Fränberg</div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 5 - 16 juni 18:00 (GLS)</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Jonas Lidén & Kristoffer Arvidsson</strong></div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div><strong>Christer Sjölander & Dennis Fränberg</strong></div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Ahmedin Murtezic</div>
+                            </div>
                         </div>
                         
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 4 - 9 juni 18:00 (GLS)</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div>Ahmedin Murtezic & Jonas Lidén</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Christer Sjölander & Kristoffer Arvidsson</div>
-                                </div>
-                            </div>
-                            <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Dennis Fränberg</div>
+                        <!-- Desktop Table -->
+                        <div class="table-container desktop-table">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vecka</th>
+                                        <th>Datum</th>
+                                        <th>Tid</th>
+                                        <th>Lag 1</th>
+                                        <th>Lag 2</th>
+                                        <th>Vilar</th>
+                                        <th>Bana</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>19 maj</td>
+                                        <td>18:00</td>
+                                        <td>Kristoffer Arvidsson & Dennis Fränberg</td>
+                                        <td>Ahmedin Murtezic & Christer Sjölander</td>
+                                        <td><em>Jonas Lidén</em></td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>26 maj</td>
+                                        <td>18:00</td>
+                                        <td>Christer Sjölander & Jonas Lidén</td>
+                                        <td>Ahmedin Murtezic & Dennis Fränberg</td>
+                                        <td><em>Kristoffer Arvidsson</em></td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>2 juni</td>
+                                        <td>18:00</td>
+                                        <td>Dennis Fränberg & Jonas Lidén</td>
+                                        <td>Kristoffer Arvidsson & Ahmedin Murtezic</td>
+                                        <td><em>Christer Sjölander</em></td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>9 juni</td>
+                                        <td>18:00</td>
+                                        <td>Ahmedin Murtezic & Jonas Lidén</td>
+                                        <td>Christer Sjölander & Kristoffer Arvidsson</td>
+                                        <td><em>Dennis Fränberg</em></td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>16 juni</td>
+                                        <td>18:00</td>
+                                        <td>Jonas Lidén & Kristoffer Arvidsson</td>
+                                        <td>Christer Sjölander & Dennis Fränberg</td>
+                                        <td><em>Ahmedin Murtezic</em></td>
+                                        <td>GLS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 5 - 16 juni 18:00 (GLS)</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div>Jonas Lidén & Kristoffer Arvidsson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Christer Sjölander & Dennis Fränberg</div>
-                                </div>
-                            </div>
-                            <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Ahmedin Murtezic</div>
-                        </div>
+                        <p style="margin-top: 16px;"><strong>Spelare:</strong> Christer Sjölander, Ahmedin Murtezic, Dennis Fränberg, Kristoffer Arvidsson, Jonas Lidén</p>
+                        <p><em>Varje spelare byter partner varje vecka och vilar en vecka under turneringen.</em></p>
                     </div>
-                    
-                    <!-- Desktop Table -->
-                    <div class="table-container desktop-table">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Vecka</th>
-                                    <th>Datum</th>
-                                    <th>Tid</th>
-                                    <th>Lag 1</th>
-                                    <th>Lag 2</th>
-                                    <th>Vilar</th>
-                                    <th>Bana</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>19 maj</td>
-                                    <td>18:00</td>
-                                    <td>Kristoffer Arvidsson & Dennis Fränberg</td>
-                                    <td>Ahmedin Murtezic & Christer Sjölander</td>
-                                    <td><em>Jonas Lidén</em></td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>26 maj</td>
-                                    <td>18:00</td>
-                                    <td>Christer Sjölander & Jonas Lidén</td>
-                                    <td>Ahmedin Murtezic & Dennis Fränberg</td>
-                                    <td><em>Kristoffer Arvidsson</em></td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>2 juni</td>
-                                    <td>18:00</td>
-                                    <td>Dennis Fränberg & Jonas Lidén</td>
-                                    <td>Kristoffer Arvidsson & Ahmedin Murtezic</td>
-                                    <td><em>Christer Sjölander</em></td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>9 juni</td>
-                                    <td>18:00</td>
-                                    <td>Ahmedin Murtezic & Jonas Lidén</td>
-                                    <td>Christer Sjölander & Kristoffer Arvidsson</td>
-                                    <td><em>Dennis Fränberg</em></td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>16 juni</td>
-                                    <td>18:00</td>
-                                    <td>Jonas Lidén & Kristoffer Arvidsson</td>
-                                    <td>Christer Sjölander & Dennis Fränberg</td>
-                                    <td><em>Ahmedin Murtezic</em></td>
-                                    <td>GLS</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <p style="margin-top: 16px;"><strong>Spelare:</strong> Christer Sjölander, Ahmedin Murtezic, Dennis Fränberg, Kristoffer Arvidsson, Jonas Lidén</p>
-                    <p><em>Varje spelare byter partner varje vecka och vilar en vecka under turneringen (4 veckor).</em></p>
-                </div>
 
+                    <div class="content-section">
+                        <h3 class="section-title">Division 2 - 5 spelare</h3>
+                        <p style="margin-bottom: 16px;"><strong>Startar:</strong> 19 maj 2025 (måndag) | <strong>Slutar:</strong> 23 juni 2025</p>
+                        
+                        <!-- Mobile Schedule -->
+                        <div class="mobile-schedule">
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 1 - 19 maj 18:00 (WFI)</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>David Rudleuski & Pierre Hill</strong></div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div><strong>Edin Murtezic & Ajdin Batic</strong></div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Kossal Alassmar</div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 2 - 26 maj 18:00 (WFI)</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>David Rudleuski & Kossal Alassmar</strong></div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div><strong>Pierre Hill & Ajdin Batic</strong></div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Edin Murtezic</div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 3 - 2 juni 18:00 (WFI)</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Pierre Hill & Edin Murtezic</strong></div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div><strong>Kossal Alassmar & David Rudleuski</strong></div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Ajdin Batic</div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 4 - 9 juni 18:00 (WFI)</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Pierre Hill & Kossal Alassmar</strong></div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div><strong>Edin Murtezic & Ajdin Batic</strong></div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: David Rudleuski</div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 5 - 16 juni 18:00 (WFI)</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>David Rudleuski & Edin Murtezic</strong></div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div><strong>Kossal Alassmar & Ajdin Batic</strong></div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Pierre Hill</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Desktop Table -->
+                        <div class="table-container desktop-table">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vecka</th>
+                                        <th>Datum</th>
+                                        <th>Tid</th>
+                                        <th>Lag 1</th>
+                                        <th>Lag 2</th>
+                                        <th>Vilar</th>
+                                        <th>Bana</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>19 maj</td>
+                                        <td>18:00</td>
+                                        <td>David Rudleuski & Pierre Hill</td>
+                                        <td>Edin Murtezic & Ajdin Batic</td>
+                                        <td><em>Kossal Alassmar</em></td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>26 maj</td>
+                                        <td>18:00</td>
+                                        <td>David Rudleuski & Kossal Alassmar</td>
+                                        <td>Pierre Hill & Ajdin Batic</td>
+                                        <td><em>Edin Murtezic</em></td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>2 juni</td>
+                                        <td>18:00</td>
+                                        <td>Pierre Hill & Edin Murtezic</td>
+                                        <td>Kossal Alassmar & David Rudleuski</td>
+                                        <td><em>Ajdin Batic</em></td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>9 juni</td>
+                                        <td>18:00</td>
+                                        <td>Pierre Hill & Kossal Alassmar</td>
+                                        <td>Edin Murtezic & Ajdin Batic</td>
+                                        <td><em>David Rudleuski</em></td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>16 juni</td>
+                                        <td>18:00</td>
+                                        <td>David Rudleuski & Edin Murtezic</td>
+                                        <td>Kossal Alassmar & Ajdin Batic</td>
+                                        <td><em>Pierre Hill</em></td>
+                                        <td>WFI</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p style="margin-top: 16px;"><strong>Spelare:</strong> David Rudleuski, Pierre Hill, Edin Murtezic, Ajdin Batic, Kossal Alassmar</p>
+                        <p><em>Varje spelare byter partner varje vecka och vilar en vecka under turneringen.</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dam Schedule -->
+            <div id="schedule-dam" class="schedule-division">
                 <div class="content-section">
-                    <h3 class="section-title">Division 2 - 5 spelare</h3>
-                    <p style="margin-bottom: 16px;"><strong>Startar:</strong> 19 maj 2025 (måndag) | <strong>Slutar:</strong> 23 juni 2025</p>
+                    <h2 class="section-title">🏆 Damturnering 2025</h2>
                     
-                    <!-- Mobile Schedule -->
-                    <div class="mobile-schedule">
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 1 - 19 maj 18:00 (WFI)</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div>David Rudleuski & Pierre Hill</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Edin Murtezic & Ajdin Batic</div>
+                    <div class="content-section">
+                        <h3 class="section-title">Division 1 - 12 spelare</h3>
+                        <p style="margin-bottom: 16px;"><strong>Startar:</strong> 20 maj 2025 (tisdag) | <strong>Slutar:</strong> 17 juni 2025</p>
+                        
+                        <!-- Mobile Schedule -->
+                        <div class="mobile-schedule">
+                                <!-- Vecka 1 -->
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 1 - 20 maj</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 1 - 16:30 (GLS)</strong></div>
+                                        <div>Linnéa Leandersson & Magdalena Nilsson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Catharina Park & Cindy Goldschmidt</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 2 - 16:30 (Konstsmide)</strong></div>
+                                        <div>Ulrika Johansson & Mia Burghardt</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Karin Nyberg & Linda FalkBoman</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 3 - 18:00 (Konstsmide) - 2 juni</strong></div>
+                                        <div>Anna Andersson & Malin Bräddhult</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Sofia Svensson & Eva Månsson</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Kossal Alassmar</div>
+                            
+                            <!-- Vecka 2 -->
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 2 - 27 maj</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 1 - 18:00 (GLS)</strong></div>
+                                        <div>Linda FalkBoman & Magdalena Nilsson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Karin Nyberg & Mia Burghardt</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 2 - 18:00 (Konstsmide)</strong></div>
+                                        <div>Anna Andersson & Linnéa Leandersson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Sofia Svensson & Ulrika Johansson</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 3 - 18:00 (WFI)</strong></div>
+                                        <div>Catharina Park & Malin Bräddhult</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Cindy Goldschmidt & Eva Månsson</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Vecka 3 -->
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 3 - 3 juni</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 1 - 16:30 (GLS)</strong></div>
+                                        <div>Karin Nyberg & Sofia Svensson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Catharina Park & Magdalena Nilsson</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 2 - 16:30 (Konstsmide)</strong></div>
+                                        <div>Malin Bräddhult & Ulrika Johansson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Anna Andersson & Eva Månsson</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 3 - 16:30 (WFI)</strong></div>
+                                        <div>Cindy Goldschmidt & Mia Burghardt</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Linda FalkBoman & Linnéa Leandersson</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Vecka 4 -->
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 4 - 10 juni</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 1 - 18:00 (GLS)</strong></div>
+                                        <div>Linnéa Leandersson & Ulrika Johansson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Linda FalkBoman & Sofia Svensson</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 2 - 18:00 (Konstsmide)</strong></div>
+                                        <div>Catharina Park & Eva Månsson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Anna Andersson & Cindy Goldschmidt</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 3 - 18:00 (Konstsmide) - 9 juni</strong></div>
+                                        <div>Karin Nyberg & Magdalena Nilsson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Malin Bräddhult & Mia Burghardt</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Vecka 5 -->
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 5 - 17 juni</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 1 - 16:30 (GLS)</strong></div>
+                                        <div>Catharina Park & Linnéa Leandersson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Anna Andersson & Sofia Svensson</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 2 - 16:30 (Konstsmide)</strong></div>
+                                        <div>Magdalena Nilsson & Malin Bräddhult</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Eva Månsson & Karin Nyberg</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 3 - 16:30 (WFI)</strong></div>
+                                        <div>Linda FalkBoman & Mia Burghardt</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Cindy Goldschmidt & Ulrika Johansson</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 2 - 26 maj 18:00 (WFI)</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div>David Rudleuski & Kossal Alassmar</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Pierre Hill & Ajdin Batic</div>
-                                </div>
-                            </div>
-                            <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Edin Murtezic</div>
+                        <!-- Desktop Table för Dam Division 1 -->
+                        <div class="table-container desktop-table">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vecka</th>
+                                        <th>Match</th>
+                                        <th>Datum</th>
+                                        <th>Tid</th>
+                                        <th>Lag 1</th>
+                                        <th>Lag 2</th>
+                                        <th>Bana</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="3">1</td>
+                                        <td>1</td>
+                                        <td>20 maj</td>
+                                        <td>16:30</td>
+                                        <td>Linnéa Leandersson & Magdalena Nilsson</td>
+                                        <td>Catharina Park & Cindy Goldschmidt</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>20 maj</td>
+                                        <td>16:30</td>
+                                        <td>Ulrika Johansson & Mia Burghardt</td>
+                                        <td>Karin Nyberg & Linda FalkBoman</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>2 juni</td>
+                                        <td>18:00</td>
+                                        <td>Anna Andersson & Malin Bräddhult</td>
+                                        <td>Sofia Svensson & Eva Månsson</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">2</td>
+                                        <td>1</td>
+                                        <td>27 maj</td>
+                                        <td>18:00</td>
+                                        <td>Linda FalkBoman & Magdalena Nilsson</td>
+                                        <td>Karin Nyberg & Mia Burghardt</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>27 maj</td>
+                                        <td>18:00</td>
+                                        <td>Anna Andersson & Linnéa Leandersson</td>
+                                        <td>Sofia Svensson & Ulrika Johansson</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>27 maj</td>
+                                        <td>18:00</td>
+                                        <td>Catharina Park & Malin Bräddhult</td>
+                                        <td>Cindy Goldschmidt & Eva Månsson</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">3</td>
+                                        <td>1</td>
+                                        <td>3 juni</td>
+                                        <td>16:30</td>
+                                        <td>Karin Nyberg & Sofia Svensson</td>
+                                        <td>Catharina Park & Magdalena Nilsson</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>3 juni</td>
+                                        <td>16:30</td>
+                                        <td>Malin Bräddhult & Ulrika Johansson</td>
+                                        <td>Anna Andersson & Eva Månsson</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>3 juni</td>
+                                        <td>16:30</td>
+                                        <td>Cindy Goldschmidt & Mia Burghardt</td>
+                                        <td>Linda FalkBoman & Linnéa Leandersson</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">4</td>
+                                        <td>1</td>
+                                        <td>10 juni</td>
+                                        <td>18:00</td>
+                                        <td>Linnéa Leandersson & Ulrika Johansson</td>
+                                        <td>Linda FalkBoman & Sofia Svensson</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>10 juni</td>
+                                        <td>18:00</td>
+                                        <td>Catharina Park & Eva Månsson</td>
+                                        <td>Anna Andersson & Cindy Goldschmidt</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>9 juni</td>
+                                        <td>18:00</td>
+                                        <td>Karin Nyberg & Magdalena Nilsson</td>
+                                        <td>Malin Bräddhult & Mia Burghardt</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">5</td>
+                                        <td>1</td>
+                                        <td>17 juni</td>
+                                        <td>16:30</td>
+                                        <td>Catharina Park & Linnéa Leandersson</td>
+                                        <td>Anna Andersson & Sofia Svensson</td>
+                                        <td>GLS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>17 juni</td>
+                                        <td>16:30</td>
+                                        <td>Magdalena Nilsson & Malin Bräddhult</td>
+                                        <td>Eva Månsson & Karin Nyberg</td>
+                                        <td>Konstsmide</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>17 juni</td>
+                                        <td>16:30</td>
+                                        <td>Linda FalkBoman & Mia Burghardt</td>
+                                        <td>Cindy Goldschmidt & Ulrika Johansson</td>
+                                        <td>WFI</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 3 - 2 juni 18:00 (WFI)</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div>Pierre Hill & Edin Murtezic</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Kossal Alassmar & David Rudleuski</div>
-                                </div>
-                            </div>
-                            <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Ajdin Batic</div>
-                        </div>
-                        
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 4 - 9 juni 18:00 (WFI)</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div>Pierre Hill & Kossal Alassmar</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Edin Murtezic & Ajdin Batic</div>
-                                </div>
-                            </div>
-                            <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: David Rudleuski</div>
-                        </div>
-                        
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 5 - 16 juni 18:00 (WFI)</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div>David Rudleuski & Edin Murtezic</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Kossal Alassmar & Ajdin Batic</div>
-                                </div>
-                            </div>
-                            <div style="font-size: 12px; color: #666; font-style: italic;">Vilar: Pierre Hill</div>
-                        </div>
+                        <p style="margin-top: 16px;"><strong>Spelare:</strong> Linnéa Leandersson, Magdalena Nilsson, Catharina Park, Cindy Goldschmidt, Ulrika Johansson, Mia Burghardt, Karin Nyberg, Linda FalkBoman, Anna Andersson, Malin Bräddhult, Sofia Svensson, Eva Månsson</p>
                     </div>
-                    
-                    <!-- Desktop Table -->
-                    <div class="table-container desktop-table">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Vecka</th>
-                                    <th>Datum</th>
-                                    <th>Tid</th>
-                                    <th>Lag 1</th>
-                                    <th>Lag 2</th>
-                                    <th>Vilar</th>
-                                    <th>Bana</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>19 maj</td>
-                                    <td>18:00</td>
-                                    <td>David Rudleuski & Pierre Hill</td>
-                                    <td>Edin Murtezic & Ajdin Batic</td>
-                                    <td><em>Kossal Alassmar</em></td>
-                                    <td>WFI</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>26 maj</td>
-                                    <td>18:00</td>
-                                    <td>David Rudleuski & Kossal Alassmar</td>
-                                    <td>Pierre Hill & Ajdin Batic</td>
-                                    <td><em>Edin Murtezic</em></td>
-                                    <td>WFI</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>2 juni</td>
-                                    <td>18:00</td>
-                                    <td>Pierre Hill & Edin Murtezic</td>
-                                    <td>Kossal Alassmar & David Rudleuski</td>
-                                    <td><em>Ajdin Batic</em></td>
-                                    <td>WFI</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>9 juni</td>
-                                    <td>18:00</td>
-                                    <td>Pierre Hill & Kossal Alassmar</td>
-                                    <td>Edin Murtezic & Ajdin Batic</td>
-                                    <td><em>David Rudleuski</em></td>
-                                    <td>WFI</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>16 juni</td>
-                                    <td>18:00</td>
-                                    <td>David Rudleuski & Edin Murtezic</td>
-                                    <td>Kossal Alassmar & Ajdin Batic</td>
-                                    <td><em>Pierre Hill</em></td>
-                                    <td>WFI</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <p style="margin-top: 16px;"><strong>Spelare:</strong> David Rudleuski, Pierre Hill, Edin Murtezic, Ajdin Batic, Kossal Alassmar</p>
-                    <p><em>Varje spelare byter partner varje vecka och vilar en vecka under turneringen (4 veckor).</em></p>
-                </div>
-            </div>
 
-            <div class="content-section">
-                <h2 class="section-title">🏆 Damturnering 2025</h2>
-                
-                <div class="content-section">
-                    <h3 class="section-title">Division 1 - 12 spelare</h3>
-                    <p style="margin-bottom: 16px;"><strong>Startar:</strong> 20 maj 2025 (tisdag) | <strong>Slutar:</strong> 17 juni 2025</p>
-                    
-                    <!-- Mobile Schedule -->
-                    <div class="mobile-schedule">
-                        <!-- Vecka 1 -->
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 1 - 20 maj</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 1 - 16:30 (GLS)</strong></div>
-                                    <div>Linnéa Leandersson & Magdalena Nilsson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Catharina Park & Cindy Goldschmidt</div>
+                    <div class="content-section division-separator">
+                        <h3 class="section-title">🏆 Dam Division 2 - 12 spelare</h3>
+                        <p style="margin-bottom: 16px;"><strong>Startar:</strong> 20 maj 2025 (tisdag) | <strong>Slutar:</strong> 17 juni 2025</p>
+                        
+                        <!-- Mobile Schedule -->
+                        <div class="mobile-schedule">
+                            <!-- Vecka 1 -->
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 1 - 20 maj</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 1 - 18:00 (GLS)</strong></div>
+                                        <div>Ajsa Elezovic & Mai Khan Vo</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Anna P & Maria Petersson</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 2 - 18:00 (Konstsmide)</strong></div>
+                                        <div>Harisa Santic & Emilia Andersson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Erika Falk & Ina Rudleuskaya</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 3 - 18:00 (WFI)</strong></div>
+                                        <div>Valeska Blomberg & Amanda Johansson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Gunilla Ljungkvist & Madeleine Remnehöjd</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 2 - 16:30 (Konstsmide)</strong></div>
-                                    <div>Ulrika Johansson & Mia Burghardt</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Karin Nyberg & Linda FalkBoman</div>
+                            
+                            <!-- Vecka 2 -->
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 2 - 27 maj</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 1 - 16:30 (GLS)</strong></div>
+                                        <div>Madeleine Remnehöjd & Amanda Johansson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Ajsa Elezovic & Anna P</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 2 - 16:30 (Konstsmide)</strong></div>
+                                        <div>Valeska Blomberg & Gunilla Ljungkvist</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Ina Rudleuskaya & Emilia Andersson</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 3 - 16:30 (WFI)</strong></div>
+                                        <div>Erika Falk & Mai Khan Vo</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Harisa Santic & Maria Petersson</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 3 - 18:00 (Konstsmide)</strong></div>
-                                    <div>Anna Andersson & Malin Bräddhult</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Sofia Svensson & Eva Månsson</div>
+                            
+                            <!-- Vecka 3 -->
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 3 - 3 juni</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 1 - 18:00 (GLS)</strong></div>
+                                        <div>Emilia Andersson & Erika Falk</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Ajsa Elezovic & Ina Rudleuskaya</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 2 - 18:00 (Konstsmide)</strong></div>
+                                        <div>Gunilla Ljungkvist & Amanda Johansson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Maria Petersson & Mai Khan Vo</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 3 - 18:00 (WFI)</strong></div>
+                                        <div>Harisa Santic & Anna P</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Madeleine Remnehöjd & Valeska Blomberg</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Vecka 4 -->
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 4 - 10 juni</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 1 - 16:30 (GLS)</strong></div>
+                                        <div>Ina Rudleuskaya & Anna P</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Emilia Andersson & Gunilla Ljungkvist</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 2 - 16:30 (Konstsmide)</strong></div>
+                                        <div>Harisa Santic & Valeska Blomberg</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Maria Petersson & Madeleine Remnehöjd</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 3 - 16:30 (WFI)</strong></div>
+                                        <div>Erika Falk & Ajsa Elezovic</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Mai Khan Vo & Amanda Johansson</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Vecka 5 -->
+                            <div class="schedule-card">
+                                <div class="schedule-week">Vecka 5 - 17 juni</div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 1 - 18:00 (GLS)</strong></div>
+                                        <div>Emilia Andersson & Madeleine Remnehöjd</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Amanda Johansson & Erika Falk</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 2 - 18:00 (Konstsmide)</strong></div>
+                                        <div>Valeska Blomberg & Maria Petersson</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Gunilla Ljungkvist & Ajsa Elezovic</div>
+                                    </div>
+                                </div>
+                                <div class="schedule-match">
+                                    <div class="schedule-teams">
+                                        <div><strong>Match 3 - 18:00 (WFI)</strong></div>
+                                        <div>Anna P & Mai Khan Vo</div>
+                                        <div class="schedule-vs">VS</div>
+                                        <div>Ina Rudleuskaya & Harisa Santic</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Vecka 2 -->
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 2 - 27 maj</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 1 - 18:00 (GLS)</strong></div>
-                                    <div>Linda FalkBoman & Magdalena Nilsson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Karin Nyberg & Mia Burghardt</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 2 - 18:00 (Konstsmide)</strong></div>
-                                    <div>Anna Andersson & Linnéa Leandersson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Sofia Svensson & Ulrika Johansson</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 3 - 18:00 (WFI)</strong></div>
-                                    <div>Catharina Park & Malin Bräddhult</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Cindy Goldschmidt & Eva Månsson</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Vecka 3 -->
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 3 - 3 juni</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 1 - 16:30 (GLS)</strong></div>
-                                    <div>Karin Nyberg & Sofia Svensson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Catharina Park & Magdalena Nilsson</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 2 - 16:30 (Konstsmide)</strong></div>
-                                    <div>Malin Bräddhult & Ulrika Johansson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Anna Andersson & Eva Månsson</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 3 - 16:30 (WFI)</strong></div>
-                                    <div>Cindy Goldschmidt & Mia Burghardt</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Linda FalkBoman & Linnéa Leandersson</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Vecka 4 -->
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 4 - 10 juni</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 1 - 18:00 (GLS)</strong></div>
-                                    <div>Linnéa Leandersson & Ulrika Johansson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Linda FalkBoman & Sofia Svensson</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 2 - 18:00 (Konstsmide)</strong></div>
-                                    <div>Catharina Park & Eva Månsson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Anna Andersson & Cindy Goldschmidt</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 3 - 18:00 (Konstsmide)</strong></div>
-                                    <div>Karin Nyberg & Magdalena Nilsson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Malin Bräddhult & Mia Burghardt</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Vecka 5 -->
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 5 - 17 juni</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 1 - 16:30 (GLS)</strong></div>
-                                    <div>Catharina Park & Linnéa Leandersson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Anna Andersson & Sofia Svensson</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 2 - 16:30 (Konstsmide)</strong></div>
-                                    <div>Magdalena Nilsson & Malin Bräddhult</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Eva Månsson & Karin Nyberg</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 3 - 16:30 (WFI)</strong></div>
-                                    <div>Linda FalkBoman & Mia Burghardt</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Cindy Goldschmidt & Ulrika Johansson</div>
-                                </div>
-                            </div>
-                        </div>
+                        <p style="margin-top: 16px;"><strong>Spelare:</strong> Ajsa Elezovic, Mai Khan Vo, Anna P, Maria Petersson, Harisa Santic, Emilia Andersson, Erika Falk, Ina Rudleuskaya, Valeska Blomberg, Amanda Johansson, Gunilla Ljungkvist, Madeleine Remnehöjd</p>
                     </div>
-                    
-                    <!-- Desktop Table -->
-                    <div class="table-container desktop-table">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Vecka</th>
-                                    <th>Match</th>
-                                    <th>Datum</th>
-                                    <th>Tid</th>
-                                    <th>Lag</th>
-                                    <th>Bana</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td rowspan="3">1</td>
-                                    <td>1</td>
-                                    <td>20 maj</td>
-                                    <td>16:30</td>
-                                    <td>Linnéa Leandersson & Magdalena Nilsson VS Catharina Park & Cindy Goldschmidt</td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>20 maj</td>
-                                    <td>16:30</td>
-                                    <td>Ulrika Johansson & Mia Burghardt VS Karin Nyberg & Linda FalkBoman</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>2 juni</td>
-                                    <td>18:00</td>
-                                    <td>Anna Andersson & Malin Bräddhult VS Sofia Svensson & Eva Månsson</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="3">2</td>
-                                    <td>1</td>
-                                    <td>27 maj</td>
-                                    <td>18:00</td>
-                                    <td>Linda FalkBoman & Magdalena Nilsson VS Karin Nyberg & Mia Burghardt</td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>27 maj</td>
-                                    <td>18:00</td>
-                                    <td>Anna Andersson & Linnéa Leandersson VS Sofia Svensson & Ulrika Johansson</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>27 maj</td>
-                                    <td>18:00</td>
-                                    <td>Catharina Park & Malin Bräddhult VS Cindy Goldschmidt & Eva Månsson</td>
-                                    <td>WFI</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="3">3</td>
-                                    <td>1</td>
-                                    <td>3 juni</td>
-                                    <td>16:30</td>
-                                    <td>Karin Nyberg & Sofia Svensson VS Catharina Park & Magdalena Nilsson</td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>3 juni</td>
-                                    <td>16:30</td>
-                                    <td>Malin Bräddhult & Ulrika Johansson VS Anna Andersson & Eva Månsson</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>3 juni</td>
-                                    <td>16:30</td>
-                                    <td>Cindy Goldschmidt & Mia Burghardt VS Linda FalkBoman & Linnéa Leandersson</td>
-                                    <td>WFI</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="3">4</td>
-                                    <td>1</td>
-                                    <td>10 juni</td>
-                                    <td>18:00</td>
-                                    <td>Linnéa Leandersson & Ulrika Johansson VS Linda FalkBoman & Sofia Svensson</td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>10 juni</td>
-                                    <td>18:00</td>
-                                    <td>Catharina Park & Eva Månsson VS Anna Andersson & Cindy Goldschmidt</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>9 juni</td>
-                                    <td>18:00</td>
-                                    <td>Karin Nyberg & Magdalena Nilsson VS Malin Bräddhult & Mia Burghardt</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="3">5</td>
-                                    <td>1</td>
-                                    <td>17 juni</td>
-                                    <td>16:30</td>
-                                    <td>Catharina Park & Linnéa Leandersson VS Anna Andersson & Sofia Svensson</td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>17 juni</td>
-                                    <td>16:30</td>
-                                    <td>Magdalena Nilsson & Malin Bräddhult VS Eva Månsson & Karin Nyberg</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>17 juni</td>
-                                    <td>16:30</td>
-                                    <td>Linda FalkBoman & Mia Burghardt VS Cindy Goldschmidt & Ulrika Johansson</td>
-                                    <td>WFI</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <p style="margin-top: 16px;"><strong>Spelare:</strong> Linnéa Leandersson, Magdalena Nilsson, Catharina Park, Cindy Goldschmidt, Ulrika Johansson, Mia Burghardt, Karin Nyberg, Linda FalkBoman, Anna Andersson, Malin Bräddhult, Sofia Svensson, Eva Månsson</p>
-                </div>
-
-               <div class="content-section">
-                    <h3 class="section-title">Division 2 - 12 spelare</h3>
-                    <p style="margin-bottom: 16px;"><strong>Startar:</strong> 20 maj 2025 (tisdag) | <strong>Slutar:</strong> 17 juni 2025</p>
-                    
-                    <!-- Mobile Schedule -->
-                    <div class="mobile-schedule">
-                        <!-- Vecka 1 -->
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 1 - 20 maj</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 1 - 18:00 (GLS)</strong></div>
-                                    <div>Ajsa Elezovic & Mai Khan Vo</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Anna P & Maria Petersson</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 2 - 18:00 (Konstsmide)</strong></div>
-                                    <div>Harisa Santic & Emilia Andersson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Erika Falk & Ina Rudleuskaya</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 3 - 18:00 (WFI)</strong></div>
-                                    <div>Valeska Blomberg & Amanda Johansson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Gunilla Ljungkvist & Madeleine Remnehöjd</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Vecka 2 -->
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 2 - 27 maj</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 1 - 16:30 (GLS)</strong></div>
-                                    <div>Madeleine Remnehöjd & Amanda Johansson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Ajsa Elezovic & Anna P</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 2 - 16:30 (Konstsmide)</strong></div>
-                                    <div>Valeska Blomberg & Gunilla Ljungkvist</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Ina Rudleuskaya & Emilia Andersson</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 3 - 16:30 (WFI)</strong></div>
-                                    <div>Erika Falk & Mai Khan Vo</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Harisa Santic & Maria Petersson</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Vecka 3 -->
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 3 - 3 juni</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 1 - 18:00 (GLS)</strong></div>
-                                    <div>Emilia Andersson & Erika Falk</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Ajsa Elezovic & Ina Rudleuskaya</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 2 - 18:00 (Konstsmide)</strong></div>
-                                    <div>Gunilla Ljungkvist & Amanda Johansson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Maria Petersson & Mai Khan Vo</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 3 - 18:00 (WFI)</strong></div>
-                                    <div>Harisa Santic & Anna P</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Madeleine Remnehöjd & Valeska Blomberg</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Vecka 4 -->
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 4 - 10 juni</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 1 - 16:30 (GLS)</strong></div>
-                                    <div>Ina Rudleuskaya & Anna P</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Emilia Andersson & Gunilla Ljungkvist</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 2 - 16:30 (Konstsmide)</strong></div>
-                                    <div>Harisa Santic & Valeska Blomberg</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Maria Petersson & Madeleine Remnehöjd</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 3 - 16:30 (WFI)</strong></div>
-                                    <div>Erika Falk & Ajsa Elezovic</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Mai Khan Vo & Amanda Johansson</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Vecka 5 -->
-                        <div class="schedule-card">
-                            <div class="schedule-week">Vecka 5 - 17 juni</div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 1 - 18:00 (GLS)</strong></div>
-                                    <div>Emilia Andersson & Madeleine Remnehöjd</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Amanda Johansson & Erika Falk</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 2 - 18:00 (Konstsmide)</strong></div>
-                                    <div>Valeska Blomberg & Maria Petersson</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Gunilla Ljungkvist & Ajsa Elezovic</div>
-                                </div>
-                            </div>
-                            <div class="schedule-match">
-                                <div class="schedule-teams">
-                                    <div><strong>Match 3 - 18:00 (WFI)</strong></div>
-                                    <div>Anna P & Mai Khan Vo</div>
-                                    <div class="schedule-vs">VS</div>
-                                    <div>Ina Rudleuskaya & Harisa Santic</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Desktop Table -->
-                    <div class="table-container desktop-table">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Vecka</th>
-                                    <th>Match</th>
-                                    <th>Datum</th>
-                                    <th>Tid</th>
-                                    <th>Lag</th>
-                                    <th>Bana</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td rowspan="3">1</td>
-                                    <td>1</td>
-                                    <td>20 maj</td>
-                                    <td>18:00</td>
-                                    <td>Ajsa Elezovic & Mai Khan Vo VS Anna P & Maria Petersson</td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>20 maj</td>
-                                    <td>18:00</td>
-                                    <td>Harisa Santic & Emilia Andersson VS Erika Falk & Ina Rudleuskaya</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>20 maj</td>
-                                    <td>18:00</td>
-                                    <td>Valeska Blomberg & Amanda Johansson VS Gunilla Ljungkvist & Madeleine Remnehöjd</td>
-                                    <td>WFI</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="3">2</td>
-                                    <td>1</td>
-                                    <td>27 maj</td>
-                                    <td>16:30</td>
-                                    <td>Madeleine Remnehöjd & Amanda Johansson VS Ajsa Elezovic & Anna P</td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>27 maj</td>
-                                    <td>16:30</td>
-                                    <td>Valeska Blomberg & Gunilla Ljungkvist VS Ina Rudleuskaya & Emilia Andersson</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>27 maj</td>
-                                    <td>16:30</td>
-                                    <td>Erika Falk & Mai Khan Vo VS Harisa Santic & Maria Petersson</td>
-                                    <td>WFI</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="3">3</td>
-                                    <td>1</td>
-                                    <td>3 juni</td>
-                                    <td>18:00</td>
-                                    <td>Emilia Andersson & Erika Falk VS Ajsa Elezovic & Ina Rudleuskaya</td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>3 juni</td>
-                                    <td>18:00</td>
-                                    <td>Gunilla Ljungkvist & Amanda Johansson VS Maria Petersson & Mai Khan Vo</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>3 juni</td>
-                                    <td>18:00</td>
-                                    <td>Harisa Santic & Anna P VS Madeleine Remnehöjd & Valeska Blomberg</td>
-                                    <td>WFI</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="3">4</td>
-                                    <td>1</td>
-                                    <td>10 juni</td>
-                                    <td>16:30</td>
-                                    <td>Ina Rudleuskaya & Anna P VS Emilia Andersson & Gunilla Ljungkvist</td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>10 juni</td>
-                                    <td>16:30</td>
-                                    <td>Harisa Santic & Valeska Blomberg VS Maria Petersson & Madeleine Remnehöjd</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>10 juni</td>
-                                    <td>16:30</td>
-                                    <td>Erika Falk & Ajsa Elezovic VS Mai Khan Vo & Amanda Johansson</td>
-                                    <td>WFI</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="3">5</td>
-                                    <td>1</td>
-                                    <td>17 juni</td>
-                                    <td>18:00</td>
-                                    <td>Emilia Andersson & Madeleine Remnehöjd VS Amanda Johansson & Erika Falk</td>
-                                    <td>GLS</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>17 juni</td>
-                                    <td>18:00</td>
-                                    <td>Valeska Blomberg & Maria Petersson VS Gunilla Ljungkvist & Ajsa Elezovic</td>
-                                    <td>Konstsmide</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>17 juni</td>
-                                    <td>18:00</td>
-                                    <td>Anna P & Mai Khan Vo VS Ina Rudleuskaya & Harisa Santic</td>
-                                    <td>WFI</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <p style="margin-top: 16px;"><strong>Spelare:</strong> Ajsa Elezovic, Mai Khan Vo, Anna P, Maria Petersson, Harisa Santic, Emilia Andersson, Erika Falk, Ina Rudleuskaya, Valeska Blomberg, Amanda Johansson, Gunilla Ljungkvist, Madeleine Remnehöjd</p>
-                </div>
-
-        <!-- Results View (existing content) -->
-        <div id="results-view" class="content-view">
-
-        <!-- Herr Divisions -->
-        <div id="herr1" class="division-content active">
-            <div class="content-section">
-                <h2 class="section-title">Rapportera Match</h2>
-                
-                <div class="form-container">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label class="form-label">Division</label>
-                            <select class="form-select" id="herr-division">
-                                <option value="herr1">Herr Division 1</option>
-                                <option value="herr2">Herr Division 2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Vecka</label>
-                            <select class="form-select" id="week-herr" onchange="updateTeamDropdowns('herr')">
-                                <option value="1">Vecka 1 (19 maj) - 18:00</option>
-                                <option value="2">Vecka 2 (26 maj) - 18:00</option>
-                                <option value="3">Vecka 3 (2 juni) - 18:00</option>
-                                <option value="4">Vecka 4 (9 juni) - 18:00</option>
-                                <option value="5">Vecka 5 (16 juni) - 18:00</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Lag A</label>
-                            <div class="team-selection">
-                                <input type="text" class="form-input clickable" id="teamA-herr" placeholder="Välj lag A" onclick="showTeamDropdown('herr', 'A')" readonly>
-                                <div class="team-dropdown" id="dropdown-herr-A"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Lag B</label>
-                            <div class="team-selection">
-                                <input type="text" class="form-input clickable" id="teamB-herr" placeholder="Välj lag B" onclick="showTeamDropdown('herr', 'B')" readonly>
-                                <div class="team-dropdown" id="dropdown-herr-B"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label class="form-label">Gem-resultat per set (A-B)</label>
-                            <div class="sets-grid">
-                                <input type="text" class="form-input" id="set1-herr" placeholder="Set 1: 6-4">
-                                <input type="text" class="form-input" id="set2-herr" placeholder="Set 2: 6-2">
-                                <input type="text" class="form-input" id="set3-herr" placeholder="Set 3: 6-1">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <button class="submit-btn clickable" onclick="submitMatch('herr')">Rapportera Match</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="alert-herr"></div>
-            </div>
-
-            <!-- Herr Division 1 Standings -->
-            <div class="content-section">
-                <h2 class="section-title">Herrar Division 1</h2>
-                <div class="table-container">
-                    <table class="standings-table" id="standings-herr1">
-                        <thead>
-                            <tr>
-                                <th>Plats</th>
-                                <th>Spelare</th>
-                                <th>Matcher</th>
-                                <th>Vinster</th>
-                                <th>Förluster</th>
-                                <th>Poäng</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Herr Division 2 Standings -->
-            <div class="content-section">
-                <h2 class="section-title">Herrar Division 2</h2>
-                <div class="table-container">
-                    <table class="standings-table" id="standings-herr2">
-                        <thead>
-                            <tr>
-                                <th>Plats</th>
-                                <th>Spelare</th>
-                                <th>Matcher</th>
-                                <th>Vinster</th>
-                                <th>Förluster</th>
-                                <th>Poäng</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Match Results -->
-            <div class="content-section">
-                <h2 class="section-title">Matchresultat - Herrar</h2>
-                <div class="filter-container">
-                    <select class="filter-select" id="weekFilter-herr" onchange="filterResults('herr')">
-                        <option value="all">Alla veckor</option>
-                        <option value="1">Vecka 1 (19 maj) - 18:00</option>
-                        <option value="2">Vecka 2 (26 maj) - 18:00</option>
-                        <option value="3">Vecka 3 (2 juni) - 18:00</option>
-                        <option value="4">Vecka 4 (9 juni) - 18:00</option>
-                        <option value="5">Vecka 5 (16 juni) - 18:00</option>
-                    </select>
-                </div>
-                <div class="table-container">
-                    <table class="data-table" id="results-herr">
-                        <thead>
-                            <tr>
-                                <th>Vecka</th>
-                                <th>Division</th>
-                                <th>Lag A</th>
-                                <th>Lag B</th>
-                                <th>Set 1</th>
-                                <th>Set 2</th>
-                                <th>Set 3</th>
-                                <th>Set-resultat</th>
-                                <th>Poäng A</th>
-                                <th>Poäng B</th>
-                                <th>Tid</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
                 </div>
             </div>
         </div>
 
-        <!-- Dam Divisions -->
-        <div id="dam1" class="division-content">
-            <div class="content-section">
-                <h2 class="section-title">Rapportera Match</h2>
-                
-                <div class="form-container">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label class="form-label">Division</label>
-                            <select class="form-select" id="dam-division">
-                                <option value="dam1">Dam Division 1</option>
-                                <option value="dam2">Dam Division 2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Vecka</label>
-                            <select class="form-select" id="week-dam" onchange="updateTeamDropdowns('dam')">
-                                <option value="1">Vecka 1 (20 maj)</option>
-                                <option value="2">Vecka 2 (27 maj)</option>
-                                <option value="3">Vecka 3 (3 juni)</option>
-                                <option value="4">Vecka 4 (10 juni)</option>
-                                <option value="5">Vecka 5 (17 juni)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Lag A</label>
-                            <div class="team-selection">
-                                <input type="text" class="form-input clickable" id="teamA-dam" placeholder="Välj lag A" onclick="showTeamDropdown('dam', 'A')" readonly>
-                                <div class="team-dropdown" id="dropdown-dam-A"></div>
+        <!-- Results View -->
+        <div id="results-view" class="content-view active">
+            <div class="division-tabs" id="division-tabs">
+                <button class="division-tab active clickable" onclick="showDivision('herr1')">Herrar</button>
+                <button class="division-tab clickable" onclick="showDivision('dam1')">Damer</button>
+            </div>
+
+            <!-- Herr Divisions -->
+            <div id="herr1" class="division-content active">
+                <div class="content-section">
+                    <h2 class="section-title">Rapportera Match - Herrar</h2>
+                    
+                    <div class="form-container">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Division</label>
+                                <select class="form-select" id="herr-division" onchange="updateTeamDropdowns('herr')">
+                                    <option value="herr1">Herr Division 1</option>
+                                    <option value="herr2">Herr Division 2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Vecka</label>
+                                <select class="form-select" id="week-herr" onchange="updateTeamDropdowns('herr')">
+                                    <option value="1">Vecka 1 (19 maj) - 18:00</option>
+                                    <option value="2">Vecka 2 (26 maj) - 18:00</option>
+                                    <option value="3">Vecka 3 (2 juni) - 18:00</option>
+                                    <option value="4">Vecka 4 (9 juni) - 18:00</option>
+                                    <option value="5">Vecka 5 (16 juni) - 18:00</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Lag A</label>
+                                <div class="team-selection">
+                                    <input type="text" class="form-input clickable" id="teamA-herr" placeholder="Välj lag A" onclick="showTeamDropdown('herr', 'A')" readonly>
+                                    <div class="team-dropdown" id="dropdown-herr-A"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Lag B</label>
+                                <div class="team-selection">
+                                    <input type="text" class="form-input clickable" id="teamB-herr" placeholder="Välj lag B" onclick="showTeamDropdown('herr', 'B')" readonly>
+                                    <div class="team-dropdown" id="dropdown-herr-B"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Lag B</label>
-                            <div class="team-selection">
-                                <input type="text" class="form-input clickable" id="teamB-dam" placeholder="Välj lag B" onclick="showTeamDropdown('dam', 'B')" readonly>
-                                <div class="team-dropdown" id="dropdown-dam-B"></div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Gem-resultat per set (A-B)</label>
+                                <div class="sets-grid">
+                                    <input type="text" class="form-input" id="set1-herr" placeholder="Set 1: 6-4">
+                                    <input type="text" class="form-input" id="set2-herr" placeholder="Set 2: 6-2">
+                                    <input type="text" class="form-input" id="set3-herr" placeholder="Set 3: 6-1">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <button class="submit-btn clickable" onclick="submitMatch('herr')">Rapportera Match</button>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label class="form-label">Gem-resultat per set (A-B)</label>
-                            <div class="sets-grid">
-                                <input type="text" class="form-input" id="set1-dam" placeholder="Set 1: 6-4">
-                                <input type="text" class="form-input" id="set2-dam" placeholder="Set 2: 6-2">
-                                <input type="text" class="form-input" id="set3-dam" placeholder="Set 3: 6-1">
+                    <div id="alert-herr" class="alert"></div>
+                </div>
+
+                <!-- Herr Division 1 Standings -->
+                <div class="content-section">
+                    <h2 class="section-title">Herrar Division 1</h2>
+                    <div class="table-container">
+                        <table class="standings-table" id="standings-herr1">
+                            <thead>
+                                <tr>
+                                    <th>Plats</th>
+                                    <th>Spelare</th>
+                                    <th>Matcher</th>
+                                    <th>Vinster</th>
+                                    <th>Förluster</th>
+                                    <th>Poäng</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Herr Division 2 Standings -->
+                <div class="content-section">
+                    <h2 class="section-title">Herrar Division 2</h2>
+                    <div class="table-container">
+                        <table class="standings-table" id="standings-herr2">
+                            <thead>
+                                <tr>
+                                    <th>Plats</th>
+                                    <th>Spelare</th>
+                                    <th>Matcher</th>
+                                    <th>Vinster</th>
+                                    <th>Förluster</th>
+                                    <th>Poäng</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Match Results -->
+                <div class="content-section">
+                    <h2 class="section-title">Matchresultat - Herrar</h2>
+                    <div class="filter-container">
+                        <select class="filter-select" id="weekFilter-herr" onchange="filterResults('herr')">
+                            <option value="all">Alla veckor</option>
+                            <option value="1">Vecka 1 (19 maj) - 18:00</option>
+                            <option value="2">Vecka 2 (26 maj) - 18:00</option>
+                            <option value="3">Vecka 3 (2 juni) - 18:00</option>
+                            <option value="4">Vecka 4 (9 juni) - 18:00</option>
+                            <option value="5">Vecka 5 (16 juni) - 18:00</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="results-herr">
+                            <thead>
+                                <tr>
+                                    <th>Vecka</th>
+                                    <th>Division</th>
+                                    <th>Lag A</th>
+                                    <th>Lag B</th>
+                                    <th>Set 1</th>
+                                    <th>Set 2</th>
+                                    <th>Set 3</th>
+                                    <th>Set-resultat</th>
+                                    <th>Poäng A</th>
+                                    <th>Poäng B</th>
+                                    <th>Tid</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dam Divisions -->
+            <div id="dam1" class="division-content">
+                <div class="content-section">
+                    <h2 class="section-title">Rapportera Match - Damer</h2>
+                    
+                    <div class="form-container">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Division</label>
+                                <select class="form-select" id="dam-division" onchange="updateTeamDropdowns('dam')">
+                                    <option value="dam1">Dam Division 1</option>
+                                    <option value="dam2">Dam Division 2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Vecka</label>
+                                <select class="form-select" id="week-dam" onchange="updateTeamDropdowns('dam')">
+                                    <option value="1">Vecka 1 (20 maj)</option>
+                                    <option value="2">Vecka 2 (27 maj)</option>
+                                    <option value="3">Vecka 3 (3 juni)</option>
+                                    <option value="4">Vecka 4 (10 juni)</option>
+                                    <option value="5">Vecka 5 (17 juni)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Lag A</label>
+                                <div class="team-selection">
+                                    <input type="text" class="form-input clickable" id="teamA-dam" placeholder="Välj lag A" onclick="showTeamDropdown('dam', 'A')" readonly>
+                                    <div class="team-dropdown" id="dropdown-dam-A"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Lag B</label>
+                                <div class="team-selection">
+                                    <input type="text" class="form-input clickable" id="teamB-dam" placeholder="Välj lag B" onclick="showTeamDropdown('dam', 'B')" readonly>
+                                    <div class="team-dropdown" id="dropdown-dam-B"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Gem-resultat per set (A-B)</label>
+                                <div class="sets-grid">
+                                    <input type="text" class="form-input" id="set1-dam" placeholder="Set 1: 6-4">
+                                    <input type="text" class="form-input" id="set2-dam" placeholder="Set 2: 6-2">
+                                    <input type="text" class="form-input" id="set3-dam" placeholder="Set 3: 6-1">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <button class="submit-btn clickable" onclick="submitMatch('dam')">Rapportera Match</button>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <button class="submit-btn clickable" onclick="submitMatch('dam')">Rapportera Match</button>
-                        </div>
+                    <div id="alert-dam" class="alert"></div>
+                </div>
+
+                <!-- Dam Division 1 Standings -->
+                <div class="content-section">
+                    <h2 class="section-title">Damer Division 1</h2>
+                    <div class="table-container">
+                        <table class="standings-table" id="standings-dam1">
+                            <thead>
+                                <tr>
+                                    <th>Plats</th>
+                                    <th>Spelare</th>
+                                    <th>Matcher</th>
+                                    <th>Vinster</th>
+                                    <th>Förluster</th>
+                                    <th>Poäng</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
-                
-                <div id="alert-dam"></div>
-            </div>
 
-            <!-- Dam Division 1 Standings -->
-            <div class="content-section">
-                <h2 class="section-title">Damer Division 1</h2>
-                <div class="table-container">
-                    <table class="standings-table" id="standings-dam1">
-                        <thead>
-                            <tr>
-                                <th>Plats</th>
-                                <th>Spelare</th>
-                                <th>Matcher</th>
-                                <th>Vinster</th>
-                                <th>Förluster</th>
-                                <th>Poäng</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                <!-- Dam Division 2 Standings -->
+                <div class="content-section">
+                    <h2 class="section-title">Damer Division 2</h2>
+                    <div class="table-container">
+                        <table class="standings-table" id="standings-dam2">
+                            <thead>
+                                <tr>
+                                    <th>Plats</th>
+                                    <th>Spelare</th>
+                                    <th>Matcher</th>
+                                    <th>Vinster</th>
+                                    <th>Förluster</th>
+                                    <th>Poäng</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Match Results -->
+                <div class="content-section">
+                    <h2 class="section-title">Matchresultat - Damer</h2>
+                    <div class="filter-container">
+                        <select class="filter-select" id="weekFilter-dam" onchange="filterResults('dam')">
+                            <option value="all">Alla veckor</option>
+                            <option value="1">Vecka 1 (20 maj)</option>
+                            <option value="2">Vecka 2 (27 maj)</option>
+                            <option value="3">Vecka 3 (3 juni)</option>
+                            <option value="4">Vecka 4 (10 juni)</option>
+                            <option value="5">Vecka 5 (17 juni)</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="results-dam">
+                            <thead>
+                                <tr>
+                                    <th>Vecka</th>
+                                    <th>Division</th>
+                                    <th>Lag A</th>
+                                    <th>Lag B</th>
+                                    <th>Set 1</th>
+                                    <th>Set 2</th>
+                                    <th>Set 3</th>
+                                    <th>Set-resultat</th>
+                                    <th>Poäng A</th>
+                                    <th>Poäng B</th>
+                                    <th>Tid</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Dam Division 2 Standings -->
-            <div class="content-section">
-                <h2 class="section-title">Damer Division 2</h2>
-                <div class="table-container">
-                    <table class="standings-table" id="standings-dam2">
-                        <thead>
-                            <tr>
-                                <th>Plats</th>
-                                <th>Spelare</th>
-                                <th>Matcher</th>
-                                <th>Vinster</th>
-                                <th>Förluster</th>
-                                <th>Poäng</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+        <!-- Stats View -->
+        <div id="stats-view" class="content-view">
+            <div class="division-tabs">
+                <button class="division-tab active clickable" onclick="showStatsDivision('herr')">Herrar</button>
+                <button class="division-tab clickable" onclick="showStatsDivision('dam')">Damer</button>
             </div>
-
-            <!-- Match Results -->
+            
             <div class="content-section">
-                <h2 class="section-title">Matchresultat - Damer</h2>
-                <div class="filter-container">
-                    <select class="filter-select" id="weekFilter-dam" onchange="filterResults('dam')">
-                        <option value="all">Alla veckor</option>
-                        <option value="1">Vecka 1 (20 maj)</option>
-                        <option value="2">Vecka 2 (27 maj)</option>
-                        <option value="3">Vecka 3 (3 juni)</option>
-                        <option value="4">Vecka 4 (10 juni)</option>
-                        <option value="5">Vecka 5 (17 juni)</option>
-                    </select>
-                </div>
-                <div class="table-container">
-                    <table class="data-table" id="results-dam">
-                        <thead>
-                            <tr>
-                                <th>Vecka</th>
-                                <th>Division</th>
-                                <th>Lag A</th>
-                                <th>Lag B</th>
-                                <th>Set 1</th>
-                                <th>Set 2</th>
-                                <th>Set 3</th>
-                                <th>Set-resultat</th>
-                                <th>Poäng A</th>
-                                <th>Poäng B</th>
-                                <th>Tid</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                <h2 class="section-title">Detaljerad Statistik</h2>
+                <div id="stats-content">
+                    <p>Statistikvy kommer snart...</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Team data based on the exact tournament schedule
+        // Team data based on the tournament schedule
         const teamData = {
             herr1: {
                 weeks: {
@@ -1866,14 +2238,7 @@
                         'Christer Sjölander & Dennis Fränberg'
                     ]
                 },
-                players: ['Christer Sjölander', 'Ahmedin Murtezic', 'Dennis Fränberg', 'Kristoffer Arvidsson', 'Jonas Lidén'],
-                restingPlayers: {
-                    1: 'Jonas Lidén',
-                    2: 'Kristoffer Arvidsson', 
-                    3: 'Christer Sjölander',
-                    4: 'Dennis Fränberg',
-                    5: 'Ahmedin Murtezic'
-                }
+                players: ['Christer Sjölander', 'Ahmedin Murtezic', 'Dennis Fränberg', 'Kristoffer Arvidsson', 'Jonas Lidén']
             },
             herr2: {
                 weeks: {
@@ -1898,14 +2263,7 @@
                         'Kossal Alassmar & Ajdin Batic'
                     ]
                 },
-                players: ['David Rudleuski', 'Pierre Hill', 'Edin Murtezic', 'Ajdin Batic', 'Kossal Alassmar'],
-                restingPlayers: {
-                    1: 'Kossal Alassmar',
-                    2: 'Edin Murtezic',
-                    3: 'Ajdin Batic', 
-                    4: 'David Rudleuski',
-                    5: 'Pierre Hill'
-                }
+                players: ['David Rudleuski', 'Pierre Hill', 'Edin Murtezic', 'Ajdin Batic', 'Kossal Alassmar']
             },
             dam1: {
                 weeks: {
@@ -1999,7 +2357,7 @@
             }
         };
 
-        // Data structure to store all match results
+        // Data structure to store all match results (using JavaScript variables instead of localStorage)
         let matchData = {
             'herr1': [],
             'herr2': [],
@@ -2010,23 +2368,49 @@
         // Navigation functions
         function showScheduleView() {
             hideAllViews();
-            document.getElementById('schedule-view').style.display = 'block';
+            document.getElementById('schedule-view').classList.add('active');
             document.getElementById('page-title').textContent = 'Spelschema';
             document.getElementById('division-tabs').style.display = 'none';
             setActiveNavButton(0);
+            
+            // Set default schedule division to herr and activate first tab
+            document.querySelectorAll('.schedule-division').forEach(div => {
+                div.classList.remove('active');
+            });
+            document.querySelectorAll('#schedule-view .division-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById('schedule-herr').classList.add('active');
+            document.querySelector('#schedule-view .division-tab').classList.add('active');
+        }
+
+        function showScheduleDivision(category) {
+            // Hide all schedule divisions
+            document.querySelectorAll('.schedule-division').forEach(div => {
+                div.classList.remove('active');
+            });
+            
+            // Hide all schedule tabs
+            document.querySelectorAll('#schedule-view .division-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected division
+            document.getElementById(`schedule-${category}`).classList.add('active');
+            event.target.classList.add('active');
         }
 
         function showResultsView() {
             hideAllViews();
-            document.getElementById('results-view').style.display = 'block';
-            document.getElementById('page-title').textContent = 'Poängtabell';
+            document.getElementById('results-view').classList.add('active');
+            document.getElementById('page-title').textContent = 'Rapportera Match';
             document.getElementById('division-tabs').style.display = 'flex';
             setActiveNavButton(1);
         }
 
         function showStatsView() {
             hideAllViews();
-            document.getElementById('results-view').style.display = 'block';
+            document.getElementById('stats-view').classList.add('active');
             document.getElementById('page-title').textContent = 'Statistik';
             document.getElementById('division-tabs').style.display = 'flex';
             setActiveNavButton(2);
@@ -2034,7 +2418,7 @@
 
         function hideAllViews() {
             document.querySelectorAll('.content-view').forEach(view => {
-                view.style.display = 'none';
+                view.classList.remove('active');
             });
         }
 
@@ -2048,78 +2432,50 @@
             });
         }
 
-        // Initialize results view on page load
+        // Initialize on page load
         window.onload = function() {
-            // Move existing content to results view
-            const resultsView = document.getElementById('results-view');
-            const existingContent = document.querySelectorAll('#herr1, #dam1');
-            existingContent.forEach(content => {
-                resultsView.appendChild(content);
-            });
-            
             showResultsView();
-            
-            // Load data safely
-            matchData = loadData();
-            
-            // Update all tables
             updateAllStandings();
             updateAllResults();
+            updateTeamDropdowns('herr');
+            updateTeamDropdowns('dam');
         };
-
-        // Safe localStorage operations with fallback
-        function saveData() {
-            try {
-                // Using variables instead of localStorage for Claude.ai compatibility
-                window.padelMatchData = matchData;
-            } catch (error) {
-                console.warn('Data storage not available:', error.message);
-            }
-        }
-
-        function loadData() {
-            try {
-                if (window.padelMatchData) {
-                    return window.padelMatchData;
-                }
-            } catch (error) {
-                console.warn('Cannot read stored data:', error.message);
-            }
-            return {
-                'herr1': [],
-                'herr2': [],
-                'dam1': [],
-                'dam2': []
-            };
-        }
 
         // Show division
         function showDivision(division) {
-            // Hide all division content
             document.querySelectorAll('.division-content').forEach(div => {
                 div.classList.remove('active');
             });
             
-            // Hide all tabs
-            document.querySelectorAll('.division-tab').forEach(tab => {
+            document.querySelectorAll('#division-tabs .division-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             
-            // Show selected division
             document.getElementById(division).classList.add('active');
             event.target.classList.add('active');
 
-            // Hide any open dropdowns
             document.querySelectorAll('.team-dropdown').forEach(dropdown => {
                 dropdown.style.display = 'none';
             });
         }
 
+        function showStatsDivision(category) {
+            // Handle stats division switching
+            document.querySelectorAll('#stats-view .division-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
         // Update team dropdowns based on selected division and week
         function updateTeamDropdowns(category) {
-            // Clear existing dropdowns
             document.getElementById(`teamA-${category}`).value = '';
             document.getElementById(`teamB-${category}`).value = '';
+            
+            // Hide all dropdowns
+            document.querySelectorAll('.team-dropdown').forEach(dropdown => {
+                dropdown.style.display = 'none';
+            });
         }
 
         // Show team dropdown based on selected week and division
@@ -2167,16 +2523,13 @@
             }
         });
 
-        // Prevent zoom on input focus for iOS
-        document.addEventListener('touchstart', function() {}, {passive: true});
-
         // Calculate who wins a set based on gem score
         function calculateSetWinner(gemsA, gemsB) {
             const a = parseInt(gemsA);
             const b = parseInt(gemsB);
             if (a > b) return 'A';
             if (b > a) return 'B';
-            return 'tie'; // shouldn't happen in padel
+            return 'tie';
         }
 
         // Submit match result
@@ -2220,15 +2573,28 @@
                     return;
                 }
                 
-                const [gemsA, gemsB] = setScore.split('-');
+                const parts = setScore.split('-');
+                if (parts.length !== 2) {
+                    showAlert(category, `Set ${i + 1}: Använd format som 6-4`, 'error');
+                    return;
+                }
+                
+                const gemsA = parts[0].trim();
+                const gemsB = parts[1].trim();
+                
+                if (isNaN(gemsA) || isNaN(gemsB)) {
+                    showAlert(category, `Set ${i + 1}: Mata in endast siffror`, 'error');
+                    return;
+                }
+                
                 const winner = calculateSetWinner(gemsA, gemsB);
                 
                 if (winner === 'A') setsWonA++;
                 else if (winner === 'B') setsWonB++;
 
                 parsedSets.push({ 
-                    gemsA: gemsA.trim(), 
-                    gemsB: gemsB.trim(),
+                    gemsA: gemsA, 
+                    gemsB: gemsB,
                     winner: winner
                 });
             }
@@ -2260,7 +2626,6 @@
 
             // Add to data
             matchData[division].push(match);
-            saveData();
 
             // Update displays
             updateAllStandings();
@@ -2380,33 +2745,40 @@
 
             // Update table
             const tbody = document.querySelector(`#standings-${division} tbody`);
-            tbody.innerHTML = '';
+            if (tbody) {
+                tbody.innerHTML = '';
 
-            sortedStandings.forEach((player, index) => {
-                const row = tbody.insertRow();
-                const position = index + 1;
-                let positionClass = 'position-other';
-                if (position === 1) positionClass = 'position-1';
-                else if (position === 2) positionClass = 'position-2';
-                else if (position === 3) positionClass = 'position-3';
+                sortedStandings.forEach((player, index) => {
+                    const row = tbody.insertRow();
+                    const position = index + 1;
+                    let positionClass = 'position-other';
+                    if (position === 1) positionClass = 'position-1';
+                    else if (position === 2) positionClass = 'position-2';
+                    else if (position === 3) positionClass = 'position-3';
 
-                row.innerHTML = `
-                    <td class="position-cell">
-                        <div class="position-badge ${positionClass}">${position}</div>
-                    </td>
-                    <td class="player-name">${player.player}</td>
-                    <td>${player.matches}</td>
-                    <td class="wins">${player.setsWon}</td>
-                    <td class="losses">${player.setsLost}</td>
-                    <td class="points-cell">${player.points}</td>
-                `;
-            });
+                    row.innerHTML = `
+                        <td class="position-cell">
+                            <div class="position-badge ${positionClass}">${position}</div>
+                        </td>
+                        <td class="player-name">${player.player}</td>
+                        <td>${player.matches}</td>
+                        <td class="wins">${player.setsWon}</td>
+                        <td class="losses">${player.setsLost}</td>
+                        <td class="points-cell">${player.points}</td>
+                    `;
+                });
+            }
         }
 
         // Filter and update results table
         function filterResults(category) {
-            const weekFilter = document.getElementById(`weekFilter-${category}`).value;
+            const weekFilter = document.getElementById(`weekFilter-${category}`);
+            if (!weekFilter) return;
+            
+            const weekFilterValue = weekFilter.value;
             const tbody = document.querySelector(`#results-${category} tbody`);
+            if (!tbody) return;
+            
             tbody.innerHTML = '';
 
             // Get all matches for this category (herr or dam)
@@ -2419,8 +2791,8 @@
 
             // Filter by week if selected
             let filteredMatches = allMatches;
-            if (weekFilter !== 'all') {
-                filteredMatches = allMatches.filter(match => match.week === parseInt(weekFilter));
+            if (weekFilterValue !== 'all') {
+                filteredMatches = allMatches.filter(match => match.week === parseInt(weekFilterValue));
             }
 
             // Sort by timestamp (newest first)
